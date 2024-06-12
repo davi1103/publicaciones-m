@@ -22,26 +22,32 @@ public class jwtServices implements Serializable {
     }
 
     public Boolean validateToken(String token) {
+        System.out.println("Validar token correcto");
         return (!isTokenExpired(token) );
     }
 
     private Boolean isTokenExpired(String token) {
+        System.out.println("Comienzo del metodo isTokenExpiredCorrecto");
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
     }
 
     public Date getExpirationDateFromToken(String token) {
+        System.out.println("Comienzo del metodo getExpiration correcto");
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
 
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+        System.out.println("Comienzo del metodo GetClaims");
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
     }
 
     private Claims getAllClaimsFromToken(String token) {
+        System.out.println("Comienzo del metodo GetAllClaims");
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+
     }
 }
 

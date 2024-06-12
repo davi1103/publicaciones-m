@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-@RequestMapping("/publication")
+@RequestMapping("")
 @RestController
 public class Controller {
 
@@ -49,7 +49,7 @@ public class Controller {
 
     @GetMapping("/list")
     public ResponseEntity<List<Publication>> list(){
-        List<Publication> lista = publicationRepository.findAll();
+        List<Publication> lista = publicationRepository.findAllByOrderByFechaDesc();
 
         return ResponseEntity.ok(lista);
     }
